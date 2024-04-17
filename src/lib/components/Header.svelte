@@ -74,10 +74,6 @@
 		flex-basis: 0;
 	}
 
-	.float-right {
-		float: right;
-	}
-
 	.userMenu {
 		margin-right: 0.5em;
 		top: 40px;
