@@ -1,4 +1,6 @@
 <script lang="ts">
+	import SLDS_UTIL_ICON_URL from '@salesforce-ux/design-system/assets/icons/utility-sprite/svg/symbols.svg';
+
 	import Cookies from 'js-cookie';
 
 	interface LoginProps {
@@ -49,7 +51,7 @@
 <div class="slds-button-group" role="group">
 	<button id="login" class="slds-button slds-button_neutral" onclick={login}>
 		<svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
-			<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#salesforce1"></use>
+			<use xlink:href="{SLDS_UTIL_ICON_URL}#salesforce1"></use>
 		</svg>Login with Salesforce
 	</button>
 	<div
@@ -63,7 +65,7 @@
 			title="More Actions"
 		>
 			<svg class="slds-button__icon" aria-hidden="true">
-				<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#settings"></use>
+				<use xlink:href="{SLDS_UTIL_ICON_URL}#settings"></use>
 			</svg>
 			<span class="slds-assistive-text">More Actions</span>
 		</button>

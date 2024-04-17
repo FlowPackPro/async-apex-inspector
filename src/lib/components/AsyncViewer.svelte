@@ -3,8 +3,8 @@
 	import EChart from './EChart.svelte';
 	import * as echarts from 'echarts';
 	import { formatDistanceStrict, format } from 'date-fns';
-
 	import { Colors } from '$lib/utils';
+	import SLDS_UTIL_ICON_URL from '@salesforce-ux/design-system/assets/icons/utility-sprite/svg/symbols.svg';
 
 	interface ChartDataItem {
 		name: string;
@@ -274,7 +274,7 @@
 	<div class="slds-inline_icon_text slds-grid slds-m-top_small noRecords">
 		<span class="slds-icon_container slds-icon-utility-announcement" title="Description of icon when needed">
 			<svg class="slds-icon slds-icon-text-light slds-icon_small" aria-hidden="true">
-				<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#info"></use>
+				<use xlink:href="{SLDS_UTIL_ICON_URL}#info"></use>
 			</svg>
 		</span>
 

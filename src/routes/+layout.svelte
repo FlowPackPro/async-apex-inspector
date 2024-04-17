@@ -1,4 +1,6 @@
 <script lang="ts">
+	import '@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css';
+
 	import { setContext } from 'svelte';
 
 	import Header from '$lib/components/Header.svelte';
