@@ -14,6 +14,7 @@ interface AsyncApexJob {
 	ApexClassId: string;
 	ApexClass: {
 		Name: string;
+		NamespacePrefix: string;
 	};
 	CompletedDate: string;
 	CreatedById: string;

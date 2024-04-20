@@ -14,6 +14,7 @@ export const GET: RequestHandler = async ({ cookies, url }) => {
 
 	const query = `SELECT ApexClassId, 
 			ApexClass.Name, 
+			ApexClass.NamespacePrefix, 
 			CompletedDate, 
 			CreatedById, 
 			CreatedBy.Name, 
@@ -64,6 +65,13 @@ export const GET: RequestHandler = async ({ cookies, url }) => {
 		records.push(...queryResponse.records);
 		done = queryResponse.done;
 	}
+
+	// Prepend the namespace prefix to the class name
+	records.forEach((record) => {		
+		if (record.ApexClass.NamespacePrefix) {
+			record.ApexClass.Name = record.ApexClass.NamespacePrefix + '.' + record.ApexClass.Name;
+		}
+	});
 
 	// Obfuscate class names if obfuscate url param is present
 	if (url.searchParams.get('obfuscate') == 'true') {
