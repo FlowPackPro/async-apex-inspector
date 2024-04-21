@@ -36,7 +36,6 @@ export const GET: RequestHandler = async ({ cookies, url }) => {
 		WHERE 
 			JobType = 'BatchApex' AND 
 			CreatedDate = LAST_N_DAYS:${daysToQuery} AND 
-			CompletedDate != NULL AND 
 			ApexClass.NamespacePrefix = NULL 
 		ORDER BY 
 			ApexClass.Name

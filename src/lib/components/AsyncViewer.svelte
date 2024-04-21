@@ -82,7 +82,12 @@
 
 		records.forEach((record, index) => {
 			const startTime = new Date(record.CreatedDate).getTime();
-			const endTime = new Date(record.CompletedDate).getTime();
+			let endTime = new Date(record.CompletedDate).getTime();
+
+			if (record.Status === 'Processing') {
+				endTime = new Date().getTime();
+			}
+
 			const values = [apexClassNames.indexOf(record.ApexClass.Name), startTime, endTime, index];
 
 			const allJobValues = [0, startTime, endTime, index];
@@ -121,7 +126,11 @@
 				formatter: function (params: any) {
 					const record = params.data.record;
 
-					const duration = formatDistanceStrict(params.value[2], params.value[1]);
+					let duration = formatDistanceStrict(params.value[2], params.value[1]);
+
+					if (record.Status === 'Processing') {
+						duration += ' (In Progress)';
+					}
 
 					return (
 						params.marker +
