@@ -16,11 +16,12 @@
 
 	let eChartOptions: echarts.EChartsOption | undefined = $state();
 
-	let records: AsyncApexJob[];
+	let allRecords: AsyncApexJob[];
 
 	let isLoading = $state(true);
 	let noRecords = $state(false);
 	let daysToDisplay = $state('1');
+	let namespace = $state('all');
 	let showAllJobsRow = $state(true);
 	let colorBy = $state('random');
 
@@ -30,23 +31,36 @@
 
 		// Get the Async apex records
 		if (fetchRecords) {
-			let obfuscate = new URL(document.location).searchParams.get('obfuscate');
+			let obfuscate = new URL(window.location.href).searchParams.get('obfuscate');
 
 			let res = await fetch(`/api/salesforce/query?days=${daysToDisplay}&obfuscate=${obfuscate}`, {
 				method: 'GET'
 			});
 
-			records = await res.json();
+			allRecords = await res.json();
 
 			if (!res.ok) {
-				console.error(records);
+				console.error(allRecords);
 				window.location.href = '/logout';
 			}
+		}
 
-			// If there are no records, show a message
-			if (records.length === 0) {
-				noRecords = true;
-			}
+		// Filter the records to chart
+		let records = allRecords;
+
+		if (namespace !== 'all') {
+			records = records.filter((record) => {
+				if (namespace === 'internal') {
+					return record.ApexClass.NamespacePrefix === null;
+				} else {
+					return record.ApexClass.NamespacePrefix !== null;
+				}
+			});
+		}
+
+		// If there are no records, show a message
+		if (records.length === 0) {
+			noRecords = true;
 		}
 
 		//  Get the min and max values for the chart range
@@ -237,6 +251,19 @@
 					<select id="colorBy" class="slds-select" bind:value={colorBy} onchange={() => buildChart(false)}>
 						<option value="random" selected>Random</option>
 						<option value="createdBy">Created By</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="slds-form-element" style="width: 100px;">
+			<label class="slds-form-element__label" for="colorBy">Namespace</label>
+			<div class="slds-form-element__control">
+				<div class="slds-select_container">
+					<select id="colorBy" class="slds-select" bind:value={namespace} onchange={() => buildChart(false)}>
+						<option value="all" selected>All</option>
+						<option value="internal">Internal</option>
+						<option value="managed">Installed Packages</option>
 					</select>
 				</div>
 			</div>
