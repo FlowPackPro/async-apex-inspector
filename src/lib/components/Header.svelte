@@ -39,7 +39,7 @@
 					<li class="slds-global-actions__item">
 						<div class="slds-dropdown-trigger slds-dropdown-trigger_click" class:slds-is-open={showUserMenu}>
 							<button
-								on:click={() => (showUserMenu = !showUserMenu)}
+								onclick={() => (showUserMenu = !showUserMenu)}
 								class="slds-button slds-global-actions__avatar slds-global-actions__item-action"
 								title="person name"
 								aria-haspopup="true"
