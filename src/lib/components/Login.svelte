@@ -59,7 +59,7 @@
 		class:slds-is-open={showMyDomain}
 	>
 		<button
-			on:click={() => (showMyDomain = !showMyDomain)}
+			onclick={() => (showMyDomain = !showMyDomain)}
 			class="slds-button slds-button_icon slds-button_icon-border-filled"
 			aria-haspopup="true"
 			title="More Actions"
@@ -73,7 +73,7 @@
 			<div class="slds-form-element">
 				<label class="slds-form-element__label" for="text-input-id-47">Custom Domain</label>
 				<div class="slds-form-element__control">
-					<input type="text" bind:value={myDomain} class="slds-input myDomain" on:keydown={handleEnter} />
+					<input type="text" bind:value={myDomain} class="slds-input myDomain" onkeydown={handleEnter} />
 				</div>
 				<div class="loginUrl" style="padding: 1px 2px ">
 					{loginUrlDisplay}
